@@ -26,7 +26,11 @@ float ParamGetFloat(int iObject, const char* pszParam, float fDefault)
 	}
 	else
 	{
+#if defined(_MSC_VER) && _MSC_VER < 1800
+		return strtod(psParam->c_str(), NULL);
+#else
 		return strtof(psParam->c_str(), NULL);
+#endif
 	}
 	return fDefault;
 }
